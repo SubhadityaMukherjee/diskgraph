@@ -1,7 +1,7 @@
 import os
 import operator
 import argparse
-from collections import defaultdict 
+from collections import defaultdict
 import networkx as nx
 import matplotlib.pyplot as plt
 
@@ -13,7 +13,7 @@ filepath = args.p
 finallist = []
 tempdic = {}
 finaldic = {}
-
+# dict levels
 def dictLevels():
     global finaldic
     for a in tempdic.keys():
@@ -25,7 +25,7 @@ def dictLevels():
     for a in range(len(temp)):
         finaldic['Level '+str(a)]=finaldic[temp[a][0]]
         del finaldic[temp[a][0]]
-
+#listing files
 def list_files(startpath):
 
     for root, dirs, files in os.walk(startpath):
@@ -41,8 +41,8 @@ def list_files(startpath):
                 templ.append(f)
 
         finallist.extend(['dd',templ])
-    
 
+#main function
 def main():
     global finaldic
     list_files(filepath)
@@ -51,7 +51,7 @@ def main():
 
     g = nx.DiGraph(finaldic)
     pos = nx.circular_layout(g)
-    plt.figure(6,figsize=(20,20)) 
+    plt.figure(6,figsize=(20,20))
     nx.draw_circular(g,with_labels=True,node_color='r',font_size=8)
     plt.draw()
     plt.savefig('output.jpg')
